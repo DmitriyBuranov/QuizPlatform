@@ -55,8 +55,8 @@ namespace QuizPlatformIS4
                     // register your IdentityServer with Google at https://console.developers.google.com
                     // enable the Google+ API
                     // set the redirect URI to https://localhost:5001/signin-google
-                    options.ClientId = "354816247057-mb3mkl0e4lmkmhvk3c25c6cgjm5jo6r1.apps.googleusercontent.com";
-                    options.ClientSecret = "ee63If-P8qAKZlCuzVEhaWPW";
+                    options.ClientId = "ID";
+                    options.ClientSecret = "secret";
                 });
         }
 
