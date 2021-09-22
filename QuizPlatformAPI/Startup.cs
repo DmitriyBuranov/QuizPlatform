@@ -4,8 +4,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using QuizPlatform.Core.Abstractions;
+using QuizPlatform.DataAccess;
 
 namespace QuizPlatformAPI
 {
@@ -23,6 +26,10 @@ namespace QuizPlatformAPI
         {
 
             services.AddControllers();
+
+            services.Configure<DbOptions>(Configuration.GetSection(nameof(DbOptions)));
+            services.AddSingleton<IDbOptions>(x => x.GetRequiredService<IOptions<DbOptions>>().Value);
+
 
             var httpClientHandler = new HttpClientHandler();
            
