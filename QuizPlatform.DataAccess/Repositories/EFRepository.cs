@@ -40,7 +40,7 @@ namespace QuizPlatform.DataAccess.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllInCategoryAsync()
+        public Task<IEnumerable<T>> GetAllInCategoryAsync()
         {
             throw new NotImplementedException();
         }
