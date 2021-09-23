@@ -1,14 +1,14 @@
 using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using QuizPlatform.Core.Abstractions;
 using QuizPlatform.DataAccess;
+using QuizPlatform.DataAccess.Data;
 
 namespace QuizPlatformAPI
 {
@@ -27,8 +27,11 @@ namespace QuizPlatformAPI
 
             services.AddControllers();
 
-            services.Configure<DbOptions>(Configuration.GetSection(nameof(DbOptions)));
-            services.AddSingleton<IDbOptions>(x => x.GetRequiredService<IOptions<DbOptions>>().Value);
+            services.AddDbContext<DataContext>(options => options
+               .UseSqlServer(Configuration.GetConnectionString("DBConnection"))
+               .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
+               .EnableSensitiveDataLogging()
+            );
 
 
             var httpClientHandler = new HttpClientHandler();
