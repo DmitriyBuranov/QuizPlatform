@@ -8,8 +8,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using QuizPlatform.Core.Abstractions;
+using QuizPlatform.Core.Abstractions.Repositories;
 using QuizPlatform.DataAccess;
 using QuizPlatform.DataAccess.Data;
+using QuizPlatform.DataAccess.Repositories;
 
 namespace QuizPlatformAPI
 {
@@ -34,12 +36,11 @@ namespace QuizPlatformAPI
                .EnableSensitiveDataLogging()
             );
 
+            services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
 
-            var httpClientHandler = new HttpClientHandler();
-           
+            var httpClientHandler = new HttpClientHandler();       
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
 
-           
             services.AddAuthentication("Bearer")
             .AddJwtBearer("Bearer", options =>
             {
@@ -50,7 +51,6 @@ namespace QuizPlatformAPI
                     ValidateAudience = false
                 };
             });
-
 
             services.AddSwaggerGen(c =>
             {
@@ -70,7 +70,6 @@ namespace QuizPlatformAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                   // c.RoutePrefix = string.Empty;
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuizPlatformAPI v1");
                 });    
             }

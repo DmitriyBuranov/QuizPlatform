@@ -26,7 +26,7 @@ public class QuestionsController : ControllerBase
     {
         var entities = await _repositoryQuestions.GetAllAsync();
 
-        var list = entities.Select(entity => new QuestionRequestDto(entity)).ToList();
+        var list = entities.Select(entity => new QuestionResponseDto(entity)).ToList();
 
         return Ok(list);
     }
