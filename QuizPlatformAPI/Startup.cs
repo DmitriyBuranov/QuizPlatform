@@ -1,15 +1,8 @@
-using System.Net.Http;
 using System.Reflection;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using QuizPlatform.Core.Abstractions;
 using QuizPlatform.Core.Abstractions.Repositories;
-using QuizPlatform.DataAccess;
 using QuizPlatform.DataAccess.Data;
 using QuizPlatform.DataAccess.Repositories;
 

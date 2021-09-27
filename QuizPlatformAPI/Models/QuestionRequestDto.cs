@@ -1,10 +1,12 @@
 ﻿
 using QuizPlatform.Core.Domain;
 using QuizPlatform.Core.Domain.QuestionManagment;
+using System.ComponentModel.DataAnnotations;
 
 namespace QuizPlatformAPI.Models;
 public class QuestionRequestDto 
 {
+    [Required]
     public string Description { get; set; }
     public Boolean WithTimer { get; set; }
     public int TimerInSeconds { get; set; }

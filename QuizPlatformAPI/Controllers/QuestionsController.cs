@@ -57,13 +57,14 @@ public class QuestionsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Guid>> CreatetQuestionAsync(QuestionRequestDto request)
     {
+        if (request.WithTimer && request.TimerInSeconds == 0)
+            return BadRequest();
 
         var entity = QuestionMapper.MapFromModel(request);
 
         await _repositoryQuestions.AddAsync(entity);
 
         return Ok(entity.Id);
-
     }
 
     /// <summary>

@@ -24,7 +24,19 @@ namespace QuizPlatform.DataAccess.Data
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-           
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Question>(entity =>
+            {
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+            });
 
             base.OnModelCreating(modelBuilder);
         }
