@@ -1,6 +1,4 @@
-﻿
-using QuizPlatform.Core.Domain;
-using QuizPlatform.Core.Domain.QuestionManagment;
+﻿using QuizPlatform.Core.Domain.QuestionManagment;
 using System.ComponentModel.DataAnnotations;
 
 namespace QuizPlatformAPI.Models;
@@ -11,6 +9,7 @@ public class QuestionRequestDto
     public Boolean WithTimer { get; set; }
     public int TimerInSeconds { get; set; }
     public Guid CategoryGuid { get; set; }
+    public Guid QuestionTypeGuid { get; set; }
 
     public QuestionRequestDto()
     {
@@ -23,6 +22,7 @@ public class QuestionRequestDto
         WithTimer = question.WithTimer;
         TimerInSeconds = question.TimerInSeconds;
         CategoryGuid = question.CategoryGuid;
+        QuestionTypeGuid = question.QuestionTypeGuid;
     }
 }
  

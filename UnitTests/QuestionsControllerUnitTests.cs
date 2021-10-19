@@ -18,6 +18,7 @@ namespace UnitTests
         /// Mocks
         /// </summary>
         private Mock<IRepository<Question>> _repositoryQuestionsMock = new Mock<IRepository<Question>>();
+        private Mock<IQuestionRepository<Question>> _specializedRepositoryQuestionsMock = new Mock<IQuestionRepository<Question>>();
 
         /// <summary>
         /// Constructor
@@ -26,7 +27,7 @@ namespace UnitTests
         public QuestionsControllerUnitTests(FixtureForControllers controllerFixture)
         {
             var provider = controllerFixture.ServiceProvider;
-            _questionsController = new QuestionsController(_repositoryQuestionsMock.Object);
+            _questionsController = new QuestionsController(_repositoryQuestionsMock.Object,_specializedRepositoryQuestionsMock.Object);
         }
 
         [Fact]

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuizPlatform.DataAccess.Data;
 
 namespace QuizPlatform.DataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211019144304_addDefaultsQuestionTypeandCategory")]
+    partial class addDefaultsQuestionTypeandCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,12 +40,12 @@ namespace QuizPlatform.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("af85376b-aa45-4f0b-8f91-0549b3118060"),
+                            Id = new Guid("da2daf11-07ef-43f3-b768-bac2d52fe604"),
                             Name = "Music"
                         },
                         new
                         {
-                            Id = new Guid("c27aba67-3fbc-4259-b458-56da8d98ad0a"),
+                            Id = new Guid("24a5a4a2-76ad-43a9-a100-26f74f0567e4"),
                             Name = "History"
                         });
                 });
@@ -65,7 +67,7 @@ namespace QuizPlatform.DataAccess.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<Guid>("QuestionTypeGuid")
+                    b.Property<Guid>("QuestionGuid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("QuestionTypeId")
@@ -104,12 +106,12 @@ namespace QuizPlatform.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7bd2074c-a652-4905-a516-22f4336a86d6"),
+                            Id = new Guid("2a675b11-641c-4de7-a317-84337ad0aeae"),
                             Name = "With exact answer"
                         },
                         new
                         {
-                            Id = new Guid("b1e33469-245c-4dd6-87fd-c2ba0427b06b"),
+                            Id = new Guid("96133875-66fd-4979-81a8-e13f5a510cdc"),
                             Name = "With answer options"
                         });
                 });

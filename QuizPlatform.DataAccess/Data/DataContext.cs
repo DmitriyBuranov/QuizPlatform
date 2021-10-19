@@ -14,6 +14,8 @@ namespace QuizPlatform.DataAccess.Data
 
         public virtual DbSet<Question> Questions { get; set; }
 
+        public virtual DbSet<QuestionType> QuestionTypes { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
@@ -31,6 +33,13 @@ namespace QuizPlatform.DataAccess.Data
                     .HasMaxLength(100);
             });
 
+            modelBuilder.Entity<QuestionType>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+            });
+
             modelBuilder.Entity<Question>(entity =>
             {
                 entity.Property(e => e.Description)
@@ -39,6 +48,12 @@ namespace QuizPlatform.DataAccess.Data
             });
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<QuestionType>().HasData(new QuestionType { Id = Guid.NewGuid(), Name = "With exact answer" });
+            modelBuilder.Entity<QuestionType>().HasData(new QuestionType { Id = Guid.NewGuid(), Name = "With answer options" });
+
+            modelBuilder.Entity<Category>().HasData(new Category { Id = Guid.NewGuid(), Name = "Music" });
+            modelBuilder.Entity<Category>().HasData(new Category { Id = Guid.NewGuid(), Name = "History" });
         }
     }
 }

@@ -9,7 +9,7 @@ public class QuestionResponseDto : BaseEntity
     public Boolean WithTimer { get; set; }
     public int TimerInSeconds { get; set; }
     public Guid CategoryGuid { get; set; }
-
+    public Guid QuestionTypeGuid { get; set; }
     public QuestionResponseDto()
     {
 
@@ -22,6 +22,7 @@ public class QuestionResponseDto : BaseEntity
         WithTimer = question.WithTimer;
         TimerInSeconds = question.TimerInSeconds;
         CategoryGuid = question.CategoryGuid;
+        QuestionTypeGuid = question.QuestionTypeGuid;
     }
 }
  

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuizPlatform.Core.Abstractions.Repositories;
 using QuizPlatform.Core.Domain;
+using QuizPlatform.Core.Domain.QuestionManagment;
 using QuizPlatform.DataAccess.Data;
 using System;
 using System.Collections.Generic;
@@ -40,10 +41,7 @@ namespace QuizPlatform.DataAccess.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public Task<IEnumerable<T>> GetAllInCategoryAsync()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public async Task<T> GetByIdAsync(Guid id)
         {

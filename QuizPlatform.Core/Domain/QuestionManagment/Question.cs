@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuizPlatform.Core.Domain.QuestionManagment
 {
@@ -13,6 +9,8 @@ namespace QuizPlatform.Core.Domain.QuestionManagment
         public int TimerInSeconds { get; set; }
         public virtual Category Category {  get; set; }
         public Guid CategoryGuid { get; set; }
+        public virtual QuestionType QuestionType {  get; set; }
+        public Guid QuestionTypeGuid { get; set; }
 
     }
 }

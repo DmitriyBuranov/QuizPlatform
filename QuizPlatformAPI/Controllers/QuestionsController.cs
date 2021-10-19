@@ -11,10 +11,13 @@ public class QuestionsController : ControllerBase
 {
 
     private readonly IRepository<Question> _repositoryQuestions;
-     
-    public QuestionsController(IRepository<Question> repositoryQuestions)
+
+    private readonly IQuestionRepository<Question> _specializedRepositoryQuestions;
+
+    public QuestionsController(IRepository<Question> repositoryQuestions, IQuestionRepository<Question> specializedRepositoryQuestions)
     {
         _repositoryQuestions = repositoryQuestions;
+        _specializedRepositoryQuestions = specializedRepositoryQuestions;
     }
 
     /// <summary>
@@ -22,9 +25,28 @@ public class QuestionsController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public async Task<ActionResult<QuestionRequestDto>> GetQuestionsAsync()
+    public async Task<ActionResult<QuestionRequestDto>> GetAllQuestionsAsync()
     {
         var entities = await _repositoryQuestions.GetAllAsync();
+
+        var list = entities.Select(entity => new QuestionResponseDto(entity)).ToList();
+
+        return Ok(list);
+    }
+
+    /// <summary>
+    /// Gets amount of Questions in Category
+    /// </summary>
+    /// <param name="categoryGuid">Category Guid</param>
+    /// <param name="num">Amount of questions</param> 
+    /// <returns></returns>
+    [HttpGet("/AmountInCategory")]
+    public async Task<ActionResult<QuestionRequestDto>> GetAmountQuestionsInCategoryAsync(int num, Guid categoryGuid)
+    {
+        var entities = await _specializedRepositoryQuestions.GetAmountInCategoryAsync(num, categoryGuid);
+
+        if (entities == null)
+            return NotFound();
 
         var list = entities.Select(entity => new QuestionResponseDto(entity)).ToList();
 
@@ -37,7 +59,7 @@ public class QuestionsController : ControllerBase
     /// <param name="id">Question Id</param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public async Task<ActionResult<QuestionRequestDto>> GettQuestionAsync(Guid id)
+    public async Task<ActionResult<QuestionRequestDto>> GetQuestionAsync(Guid id)
     {
         var entity = await _repositoryQuestions.GetByIdAsync(id);
 

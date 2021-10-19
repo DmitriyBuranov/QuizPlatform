@@ -30,6 +30,7 @@ namespace QuizPlatformAPI
             );
 
             services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
+            services.AddScoped(typeof(IQuestionRepository<>), typeof(EFQuestionRepository<>));
 
             var httpClientHandler = new HttpClientHandler();       
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };

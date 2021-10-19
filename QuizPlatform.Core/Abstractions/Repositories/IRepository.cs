@@ -13,8 +13,6 @@ namespace QuizPlatform.Core.Abstractions.Repositories
 
         Task<T> GetByIdAsync(Guid id);
 
-        Task<IEnumerable<T>> GetAllInCategoryAsync();
-
         Task AddAsync(T entity);
 
         Task UpdateAsync(T entity);
