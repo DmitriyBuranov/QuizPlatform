@@ -24,10 +24,10 @@ namespace QuizPlatform.DataAccess.Repositories
         public async Task<IEnumerable<T>> GetAmountInCategoryAsync(int num,Guid categoryGuid)
         {
             Random rnd = new();
-            var WithCategory = _dbSet.Where(x => x.CategoryGuid == categoryGuid);
-            var AmountWithCategory = WithCategory.OrderBy(x => rnd.Next(WithCategory.Count())).Take(num).ToListAsync();
+            var WithCategory = await _dbSet.Where(x => x.CategoryGuid == categoryGuid).ToListAsync();
+            var AmountWithCategory = WithCategory.OrderBy(x => rnd.Next(1, WithCategory.Count - 1)).Take(num);
 
-            return await AmountWithCategory;
+            return  AmountWithCategory;
         }
     }
 }
